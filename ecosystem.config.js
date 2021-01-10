@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "prueba",
       script: "npm i && npm run dev",
-      env: {}
+      env: { algo: 1 }
     },
     {
       name: "prueba2",
@@ -16,16 +16,17 @@ module.exports = {
 
   deploy: {
     production: {
-      user: 'APP',
       // SAIS IPS
+      user: 'APP',
       host: '181.57.176.142',
-      key: "~/.ssh/deploy_rsa.pub",
+      key: "~/.ssh/id_rsa",
       ref: 'origin/master',
       repo: 'git@github.com:Mozzarth/pm2DeployPrueba.git',
-      path: './pruebaMozzarthPm2',
+      path: './',
+      "ssh_options": ["PasswordAuthentication=no"],
+      'pre-setup': 'echo este es un Hola de mi maquina local',
       'pre-deploy-local': 'ls',
-      'post-deploy': 'npm i && npm run dev',
-      'pre-setup': ''
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production'
     }
   }
 };
