@@ -1,9 +1,16 @@
 module.exports = {
   apps: [
     {
-      name: "miapp",
-      script: 'node dist/index.js',
-      ignore_watch: ["node_modules"]
+      name: "prueba",
+      script: "npm i && npm run dev",
+      env: {}
+    },
+    {
+      name: "prueba2",
+      script: "npm i && npm run dev",
+      env: {
+        NODE_PORT: 3020
+      }
     }
   ],
 
@@ -11,13 +18,13 @@ module.exports = {
     production: {
       user: 'APP',
       // SAIS IPS
-      host: '192.168.2.78',
+      host: '181.57.176.142',
       key: "~/.ssh/deploy_rsa.pub",
       ref: 'origin/master',
       repo: 'git@github.com:Mozzarth/pm2DeployPrueba.git',
       path: './pruebaMozzarthPm2',
       'pre-deploy-local': 'ls',
-      'post-deploy': 'npm i && tsc && pm2 reload ecosystem.config.js',
+      'post-deploy': 'npm i && npm run dev',
       'pre-setup': ''
     }
   }
